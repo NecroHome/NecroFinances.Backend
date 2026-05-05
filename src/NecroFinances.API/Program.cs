@@ -39,8 +39,7 @@ namespace NecroFinances.API
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 var cs = builder.Configuration.GetConnectionString("DefaultConnection");
-                options.UseMySql(cs, ServerVersion.AutoDetect(cs),
-                    o => o.EnableRetryOnFailure());
+                options.UseMySql(cs, new MySqlServerVersion(new Version(8, 0, 36)));
             });
 
             builder.Services.Configure<JwtSettings>(
@@ -89,13 +88,6 @@ namespace NecroFinances.API
 
 
             var app = builder.Build();
-
-            using (IServiceScope scope = app.Services.CreateScope())
-            {
-                IServiceProvider services = scope.ServiceProvider;
-                AppDbContext context = services.GetRequiredService<AppDbContext>();
-                context.Database.Migrate();
-            }
 
             if (app.Environment.IsDevelopment())
             {
