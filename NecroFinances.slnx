@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/NecroFinances.API/NecroFinances.API.csproj" />
+    <Project Path="src/NecroFinances.Application/NecroFinances.Application.csproj" />
+    <Project Path="src/NecroFinances.Infrastructure/NecroFinances.Infrastructure.csproj" />
+  </Folder>
+</Solution>
