@@ -97,7 +97,7 @@ namespace NecroFinances.API
             }
 
             app.UseCors("CorsPolicy");
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
 

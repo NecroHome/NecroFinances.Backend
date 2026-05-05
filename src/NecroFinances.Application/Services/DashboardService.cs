@@ -133,7 +133,8 @@ namespace NecroFinances.Application.Services
             double totalGastosMesAnterior = gastosMesAnterior.Sum(s => s.Valor);
             double diferencaGastos = totalGastosMesAtual - totalGastosMesAnterior;
 
-            double diferencaMeta = settingsMesAtual.DesafioGastos - (totalGastosParceladosMesAtual + totalGastosAvulsosMesAtual);
+            double valorMeta = settingsMesAtual.DesafioGastos - (totalGastosParceladosMesAtual + totalGastosAvulsosMesAtual);
+            double diferencaMeta = valorMeta - (settingsMesAnterior.DesafioGastos - (totalGastosParceladosMesAnterior + totalGastosAvulsosMesAnterior));
 
             double totalRestanteMesAtual = totalLiquidoMesAtual - totalGastosMesAtual;
             double totalRestanteMesAnterior = totalLiquidoMesAnterior - totalGastosMesAnterior;
@@ -169,6 +170,7 @@ namespace NecroFinances.Application.Services
             mainData.totalGastosAvulsos = totalGastosAvulsosMesAtual;
             mainData.diferencaGastosAvulsos = diferencaGastosAvulsos;
 
+            mainData.valorMeta = valorMeta;
             mainData.diferencaMeta = diferencaMeta;
 
             mainData.listaGastosFixos = ConsolidarGastos(gastosMesAtual, gastosMesAnterior, IndicadorTipoGasto.RECORRENTE, totalLiquidoMesAtual);

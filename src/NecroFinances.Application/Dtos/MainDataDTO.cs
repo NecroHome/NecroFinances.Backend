@@ -35,6 +35,7 @@ namespace NecroFinances.Application.Dtos
         public double totalGastosAvulsos { get; set; }
         public double diferencaGastosAvulsos { get; set; }
 
+        public double valorMeta { get; set; }
         public double diferencaMeta { get; set; }
 
         public List<DashboardDTO> listaGastosFixos { get; set; }
