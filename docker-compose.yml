@@ -1,36 +1,22 @@
-version: "3.9"
-
 services:
-  mariadb:
-    image: mariadb:11.4
-    ports:
-      - "3306:3306"
-    container_name: mariadb_local
-    restart: always
-    environment:
-      MARIADB_ROOT_PASSWORD: thiago123
-      MARIADB_DATABASE: NecroFinances
-      MARIADB_USER: admin
-      MARIADB_PASSWORD: thiago123
-    volumes:
-      - /home/necrofinances/NecroFinances.DataBase:/var/lib/mysql
-    networks:
-      - necro_network
-
   api:
     build:
       context: .
       dockerfile: Dockerfile
+
     container_name: necro_api
+
+    restart: unless-stopped
+
     ports:
       - "8080:8080"
-    depends_on:
-      - mariadb
-    restart: unless-stopped
+
     environment:
-      - ConnectionStrings__DefaultConnection=Server=mariadb;Port=3306;Database=NecroFinances;User=admin;Password=thiago123;
+      - ConnectionStrings__DefaultConnection=Server=mariadb_local;Port=3306;Database=NecroFinances;User=admin;Password=thiago123;
+
     networks:
       - necro_network
 
 networks:
   necro_network:
+    external: true
