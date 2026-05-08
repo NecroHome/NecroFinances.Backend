@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/Itens de Solução/">
+    <File Path="docker-compose.yml" />
+    <File Path="Dockerfile" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/NecroFinances.API/NecroFinances.API.csproj" />
     <Project Path="src/NecroFinances.Application/NecroFinances.Application.csproj" />
