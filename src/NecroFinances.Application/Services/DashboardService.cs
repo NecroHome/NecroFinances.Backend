@@ -184,11 +184,7 @@ namespace NecroFinances.Application.Services
             return mainData;
         }
 
-        private List<DashboardDTO> ConsolidarGastos(
-    List<GastosModel> mesAtual,
-    List<GastosModel> mesAnterior,
-    IndicadorTipoGasto tipoGasto,
-    double totalGastosMesAtual)
+        private List<DashboardDTO> ConsolidarGastos(List<GastosModel> mesAtual, List<GastosModel> mesAnterior, IndicadorTipoGasto tipoGasto, double totalGastosMesAtual)
         {
             var resultado = new List<DashboardDTO>();
             int id = 0;
@@ -201,14 +197,12 @@ namespace NecroFinances.Application.Services
                 .Where(w => w.TipoGasto == tipoGasto)
                 .ToList();
 
-            // 🔥 PARCELADO OU RECORRENTE → NÃO AGRUPA
             if (tipoGasto == IndicadorTipoGasto.PARCELADO)
             {
                 foreach (var item in atualFiltrado)
                 {
                     double valorAnterior = 0;
 
-                    // 🔹 PARCELADO → compara com parcela anterior
                     if (tipoGasto == IndicadorTipoGasto.PARCELADO)
                     {
                         var parcelaAnterior = item.Parcela - 1;
@@ -219,7 +213,6 @@ namespace NecroFinances.Application.Services
                     }
                     else
                     {
-                        // 🔹 RECORRENTE → compara mesma "entidade"
                         valorAnterior = anteriorFiltrado
                             .Where(x =>
                                 (x.Serie != 0 && x.Serie == item.Serie) ||
@@ -264,7 +257,6 @@ namespace NecroFinances.Application.Services
                     .ToList();
             }
 
-            // 🔹 OUTROS → AGRUPADO POR ICONE
             var atualAgrupado = atualFiltrado
                 .GroupBy(g => g.Icone)
                 .ToDictionary(
