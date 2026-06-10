@@ -10,7 +10,7 @@ namespace NecroFinances.Application.Interfaces
 {
     public interface ISettingsService
     {
-        Task<SettingsDTO> GetSettingsByDate(DateTime inicio, DateTime fim, long userID);
+        Task<SettingsDTO> GetSettingsByDate(DateOnly inicio, DateOnly fim, long userID);
         Task<SettingsDTO> UpdateSettings(SettingsDTO model, long userID);
     }
 }

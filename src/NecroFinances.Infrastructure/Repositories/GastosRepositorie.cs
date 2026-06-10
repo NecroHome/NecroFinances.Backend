@@ -63,7 +63,7 @@ namespace NecroFinances.Infrastructure.Repositories
             return model;
         }
 
-        public async Task<List<GastosModel>> GetGastosByDate(DateTime inicio, DateTime fim, long userID)
+        public async Task<List<GastosModel>> GetGastosByDate(DateOnly inicio, DateOnly fim, long userID)
         {
             List<GastosModel> list = await _context.Gastos
                 .Where(w => w.DataGasto >= inicio && w.DataGasto <= fim && w.UserID == userID)

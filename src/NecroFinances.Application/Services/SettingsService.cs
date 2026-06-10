@@ -22,7 +22,7 @@ namespace NecroFinances.Application.Services
             _repository = repositorie;
         }
         
-        public async Task<SettingsDTO> GetSettingsByDate(DateTime inicio, DateTime fim, long userID)
+        public async Task<SettingsDTO> GetSettingsByDate(DateOnly inicio, DateOnly fim, long userID)
         {
             SettingsModel model = await _repository.GetSettingsByDate(inicio, fim, userID);
             if (model == null)
@@ -32,13 +32,13 @@ namespace NecroFinances.Application.Services
             return new SettingsDTO(model);
         }
 
-        private async Task<SettingsModel> GenerateNewModel(DateTime inicio, long userID)
+        private async Task<SettingsModel> GenerateNewModel(DateOnly inicio, long userID)
         {
             SettingsModel baseModel = await _repository.GetLastSettings(userID);
             if (baseModel == null)
             {
                 baseModel = new SettingsModel();
-                baseModel.Data = DiasHorasUteisHelper.AjustarParaDia(inicio, 10);
+                baseModel.Data = new DateOnly(inicio.Year, inicio.Month, 10);
                 baseModel.ValorHora = 0;
                 baseModel.SalarioMinimo = 0;
                 baseModel.PercentagemTaxaINSS = 0;
@@ -53,7 +53,7 @@ namespace NecroFinances.Application.Services
             }
 
             SettingsModel novoModel = new SettingsModel();
-            novoModel.Data = DiasHorasUteisHelper.AjustarParaDia(inicio, 10);
+            novoModel.Data = new DateOnly(inicio.Year, inicio.Month, 10);
             novoModel.ValorHora = baseModel.ValorHora;
             novoModel.SalarioMinimo = baseModel.SalarioMinimo;
             novoModel.PercentagemTaxaINSS = baseModel.PercentagemTaxaINSS;

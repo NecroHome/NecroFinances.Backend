@@ -8,7 +8,7 @@ namespace NecroFinances.Application.Interfaces
 {
     public interface IPatrimonioService
     {
-        Task<PatrimonioDTO> GetPatrimonioByDate(DateTime inicio, DateTime fim, long userID);
+        Task<PatrimonioDTO> GetPatrimonioByDate(DateOnly inicio, DateOnly fim, long userID);
         Task<PatrimonioDTO> UpdatePatrimonio(PatrimonioDTO dto, long userID);
     }
 }

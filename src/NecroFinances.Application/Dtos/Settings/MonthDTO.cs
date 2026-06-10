@@ -10,7 +10,7 @@ namespace NecroFinances.Application.Dtos.Settings
     public class MesDTO
     {
         public long Id { get; set; }
-        public DateTime Data { get; set; }
+        public DateOnly Data { get; set; }
         public int DiasUteis { get; set; }
         public int HorasUteis { get; set; }
         public int HorasExtras { get; set; }

@@ -8,7 +8,7 @@ namespace NecroFinances.Application.Dtos
     public class PatrimonioDTO
     {
         public long Id { get; set; }
-        public DateTime Data { get; set; }
+        public DateOnly Data { get; set; }
         public List<PropriedadeDTO> Propriedades { get; set; }
         public List<InvestimentoDTO> Investimentos { get; set; }
         public List<FinanciamentoDTO> Financiamentos { get; set; }

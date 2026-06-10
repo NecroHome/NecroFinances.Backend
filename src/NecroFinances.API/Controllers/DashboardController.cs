@@ -18,7 +18,7 @@ namespace NecroFinances.API.Controllers
         }
         [Authorize]
         [HttpGet("GetDashboard")]
-        public async Task<IActionResult> GetDashboard(DateTime inicio, DateTime fim)
+        public async Task<IActionResult> GetDashboard(DateOnly inicio, DateOnly fim)
         {
             string user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (!long.TryParse(user, out long userID))

@@ -12,7 +12,7 @@ namespace NecroFinances.Application.Dtos
     {
         public long? Id { get; set; }
         public long Serie { get; set; }
-        public DateTime DataGasto { get; set; }
+        public DateOnly DataGasto { get; set; }
         public IndicadorTipoGasto TipoGasto { get; set; }
         public double Valor { get; set; }
         public string Icone { get; set; }

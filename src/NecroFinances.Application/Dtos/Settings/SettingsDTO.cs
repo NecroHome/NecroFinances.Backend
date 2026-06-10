@@ -10,7 +10,7 @@ namespace NecroFinances.Application.Dtos
     public class SettingsDTO
     {
         public long Id { get; set; }
-        public DateTime Data { get; set; }
+        public DateOnly Data { get; set; }
         public double ValorHora { get; set; }
         public double SalarioMinimo { get; set; }
         public double PercentagemTaxaINSS { get; set; }

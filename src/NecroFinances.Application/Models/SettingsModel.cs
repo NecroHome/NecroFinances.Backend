@@ -12,7 +12,7 @@ namespace NecroFinances.Application.Models
         public long Id { get; set; }
 
         [Column("Data")]
-        public DateTime Data { get; set; }
+        public DateOnly Data { get; set; }
 
         [Column("ValorHora")]
         public double ValorHora { get; set; }

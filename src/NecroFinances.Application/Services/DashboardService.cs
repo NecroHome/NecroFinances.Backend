@@ -30,7 +30,7 @@ namespace NecroFinances.Application.Services
             _patrimonioService = patrimonioService;
         }
 
-        public async Task<MainDataDTO> GetDashboard(DateTime inicio, DateTime fim, long userID)
+        public async Task<MainDataDTO> GetDashboard(DateOnly inicio, DateOnly fim, long userID)
         {
             List<GastosModel> gastosMesAtual = await _gastosRepositorie.GetGastosByDate(inicio, fim, userID);
             List<GastosModel> gastosMesAnterior = await _gastosRepositorie.GetGastosByDate(inicio.AddMonths(-1), fim.AddMonths(-1), userID);

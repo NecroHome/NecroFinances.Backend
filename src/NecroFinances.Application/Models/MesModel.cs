@@ -16,7 +16,7 @@ namespace NecroFinances.Application.Models
         public long Id { get; set; }
 
         [Column("Data")]
-        public DateTime Data {  get; set; }
+        public DateOnly Data {  get; set; }
 
         [Column("DiasUteis")]
         public int DiasUteis { get; set; }

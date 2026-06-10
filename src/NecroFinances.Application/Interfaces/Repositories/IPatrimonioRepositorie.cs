@@ -6,7 +6,7 @@ namespace NecroFinances.Application.Interfaces.Repositories
 {
     public interface IPatrimonioRepositorie
     {
-        Task<PatrimonioModel> GetPatrimonioByDate(DateTime inicio, DateTime fim, long userID);
+        Task<PatrimonioModel> GetPatrimonioByDate(DateOnly inicio, DateOnly fim, long userID);
         Task<PatrimonioModel> AddPatrimonio(PatrimonioModel model);
         Task<PatrimonioModel> GetPatrimonioById(long id, long userID);
         Task<PatrimonioModel> UpdatePatrimonio(PatrimonioModel model);

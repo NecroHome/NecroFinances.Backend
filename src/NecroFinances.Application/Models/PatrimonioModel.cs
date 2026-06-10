@@ -12,7 +12,7 @@ namespace NecroFinances.Application.Models
         [Key]
         public long Id { get; set; }
 
-        public DateTime Data { get; set; }
+        public DateOnly Data { get; set; }
 
         public long UserID { get; set; }
 

@@ -15,7 +15,7 @@ namespace NecroFinances.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<SettingsModel> GetSettingsByDate(DateTime inicio, DateTime fim, long userID)
+        public async Task<SettingsModel> GetSettingsByDate(DateOnly inicio, DateOnly fim, long userID)
         {
             SettingsModel model = await _context.Settings
                 .Where(w => w.Data >= inicio && w.Data <= fim && w.UserID == userID)

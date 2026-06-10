@@ -15,7 +15,7 @@ namespace NecroFinances.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<PatrimonioModel> GetPatrimonioByDate(DateTime inicio, DateTime fim, long userID)
+        public async Task<PatrimonioModel> GetPatrimonioByDate(DateOnly inicio, DateOnly fim, long userID)
         {
             PatrimonioModel model = await _context.Patrimonios
                 .Include(i => i.Propriedades)

@@ -22,7 +22,7 @@ namespace NecroFinances.API.Controllers
 
         [Authorize]
         [HttpGet("GetSettingsByDate")]
-        public async Task<IActionResult> GetSettingsByDate(DateTime inicio, DateTime fim)
+        public async Task<IActionResult> GetSettingsByDate(DateOnly inicio, DateOnly fim)
         {
             string user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (!long.TryParse(user, out long userID))

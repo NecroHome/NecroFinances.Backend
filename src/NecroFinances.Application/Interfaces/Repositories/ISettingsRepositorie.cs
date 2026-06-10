@@ -10,7 +10,7 @@ namespace NecroFinances.Application.Interfaces.Repositories
 {
     public interface ISettingsRepositorie
     {
-        Task<SettingsModel> GetSettingsByDate(DateTime inicio, DateTime fim, long userID);
+        Task<SettingsModel> GetSettingsByDate(DateOnly inicio, DateOnly fim, long userID);
         Task<SettingsModel> GetLastSettings(long userID);
         Task<SettingsModel> SaveSettings(SettingsModel model);
         Task<SettingsModel> UpdateSettings(SettingsModel model);

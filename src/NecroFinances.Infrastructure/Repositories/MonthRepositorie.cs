@@ -22,7 +22,7 @@ namespace NecroFinances.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<MesModel> GetMesByDate(DateTime inicio, DateTime fim, long userID)
+        public async Task<MesModel> GetMesByDate(DateOnly inicio, DateOnly fim, long userID)
         {
             MesModel model = await _context.Meses
                 .Where(w => w.Data >= inicio && w.Data <= fim && w.UserID == userID)

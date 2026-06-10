@@ -10,7 +10,7 @@ namespace NecroFinances.Application.Interfaces.Repositories
 {
     public interface IMesRepositorie
     {
-        Task<MesModel> GetMesByDate(DateTime inicio, DateTime fim, long userID);
+        Task<MesModel> GetMesByDate(DateOnly inicio, DateOnly fim, long userID);
         Task<MesModel> GetLastMes();
         Task<MesModel> SaveMes(MesModel mes);
         Task<MesModel> GetMesById(long id, long userID);

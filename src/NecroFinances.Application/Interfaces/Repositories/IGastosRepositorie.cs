@@ -16,6 +16,6 @@ namespace NecroFinances.Application.Interfaces.Repositories
         Task<bool> DeleteGasto(GastosModel model);
         Task<GastosModel> GetGastoById(long gastoId, long userID);
         Task<GastosModel> UpdateGasto(GastosModel model);
-        Task<List<GastosModel>> GetGastosByDate(DateTime inicio, DateTime fim, long userID);
+        Task<List<GastosModel>> GetGastosByDate(DateOnly inicio, DateOnly fim, long userID);
     }
 }

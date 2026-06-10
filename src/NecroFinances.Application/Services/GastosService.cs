@@ -27,8 +27,8 @@ namespace NecroFinances.Application.Services
             {
                 for (int i = 0; i < dto.TotalParcelas; i++)
                 {
-                    DateTime dataBase = dto.DataGasto.AddMonths(i);
-                    DateTime data = DiasHorasUteisHelper.AjustarParaDia(dataBase, 15);
+                    DateOnly dataBase = dto.DataGasto.AddMonths(i);
+                    DateOnly data = new DateOnly(dataBase.Year, dataBase.Month, 15);
 
                     GastosModel parcela = new GastosModel
                     {
@@ -48,12 +48,11 @@ namespace NecroFinances.Application.Services
             }
             else if (dto.TipoGasto == IndicadorTipoGasto.RECORRENTE)
             {
-                DateTime inicio = DiasHorasUteisHelper.AjustarParaDia(dto.DataGasto, 10);
+                DateOnly inicio = new DateOnly(dto.DataGasto.Year, dto.DataGasto.Month, 10);
 
                 for (int mes = inicio.Month; mes <= 12; mes++)
                 {
-                    DateTime data = new DateTime(inicio.Year, mes, 10,
-                        inicio.Hour, inicio.Minute, inicio.Second, inicio.Kind);
+                    DateOnly data = new DateOnly(inicio.Year, mes, 10);
 
                     GastosModel gasto = new GastosModel
                     {

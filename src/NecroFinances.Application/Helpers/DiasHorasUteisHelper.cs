@@ -8,7 +8,7 @@ namespace NecroFinances.Application.Helpers
 {
     public static class DiasHorasUteisHelper
     {
-        public static int CalcularDiasUteis(DateTime date)
+        public static int CalcularDiasUteis(DateOnly date)
         {
             int ano = date.Year;
             int mes = date.Month;
@@ -20,7 +20,7 @@ namespace NecroFinances.Application.Helpers
 
             for (int dia = 1; dia <= diasNoMes; dia++)
             {
-                var data = new DateTime(ano, mes, dia);
+                var data = new DateOnly(ano, mes, dia);
 
                 if (data.DayOfWeek == DayOfWeek.Saturday || data.DayOfWeek == DayOfWeek.Sunday)
                     continue;
@@ -34,29 +34,29 @@ namespace NecroFinances.Application.Helpers
             return diasUteis;
         }
 
-        private static HashSet<DateTime> FeriadosNacionais(int ano)
+        private static HashSet<DateOnly> FeriadosNacionais(int ano)
         {
-            var feriados = new HashSet<DateTime>();
+            var feriados = new HashSet<DateOnly>();
 
-            feriados.Add(new DateTime(ano, 1, 1));   // Confraternização Universal
-            feriados.Add(new DateTime(ano, 4, 21));  // Tiradentes
-            feriados.Add(new DateTime(ano, 5, 1));   // Dia do Trabalho
-            feriados.Add(new DateTime(ano, 9, 7));   // Independência
-            feriados.Add(new DateTime(ano, 10, 12)); // Nossa Senhora Aparecida
-            feriados.Add(new DateTime(ano, 11, 2));  // Finados
-            feriados.Add(new DateTime(ano, 11, 15)); // Proclamação da República
-            feriados.Add(new DateTime(ano, 12, 25)); // Natal
+            feriados.Add(new DateOnly(ano, 1, 1));
+            feriados.Add(new DateOnly(ano, 4, 21));
+            feriados.Add(new DateOnly(ano, 5, 1));
+            feriados.Add(new DateOnly(ano, 9, 7));
+            feriados.Add(new DateOnly(ano, 10, 12));
+            feriados.Add(new DateOnly(ano, 11, 2));
+            feriados.Add(new DateOnly(ano, 11, 15));
+            feriados.Add(new DateOnly(ano, 12, 25));
 
-            DateTime pascoa = DataPascoa(ano);
-            feriados.Add(pascoa.AddDays(-48)); // Carnaval (segunda)
-            feriados.Add(pascoa.AddDays(-47)); // Carnaval (terça)
-            feriados.Add(pascoa.AddDays(-2));  // Sexta-feira Santa
-            feriados.Add(pascoa.AddDays(60));  // Corpus Christi
+            DateOnly pascoa = DataPascoa(ano);
+            feriados.Add(pascoa.AddDays(-48));
+            feriados.Add(pascoa.AddDays(-47));
+            feriados.Add(pascoa.AddDays(-2));
+            feriados.Add(pascoa.AddDays(60));
 
             return feriados;
         }
 
-        private static DateTime DataPascoa(int ano)
+        private static DateOnly DataPascoa(int ano)
         {
             int a = ano % 19;
             int b = ano / 100;
@@ -73,7 +73,7 @@ namespace NecroFinances.Application.Helpers
             int mes = (h + l - 7 * m + 114) / 31;
             int dia = ((h + l - 7 * m + 114) % 31) + 1;
 
-            return new DateTime(ano, mes, dia);
+            return new DateOnly(ano, mes, dia);
         }
 
         public static int DeterminarMesBase(DateTime data)
@@ -112,30 +112,6 @@ namespace NecroFinances.Application.Helpers
                 0,
                 0,
                 0,
-                DateTimeKind.Local
-            );
-        }
-
-        public static DateTime AjustarParaDia(DateTime data, int dia)
-        {
-            DateTime dataLocal = data.Kind switch
-            {
-                DateTimeKind.Utc => data.ToLocalTime(),
-                DateTimeKind.Unspecified => DateTime.SpecifyKind(data, DateTimeKind.Local),
-                _ => data
-            };
-
-            var baseDate = dataLocal.Day < dia ? dataLocal.AddMonths(-1) : dataLocal;
-
-            int diaFinal = Math.Min(dia, DateTime.DaysInMonth(baseDate.Year, baseDate.Month));
-
-            return new DateTime(
-                baseDate.Year,
-                baseDate.Month,
-                diaFinal,
-                dataLocal.Hour,
-                dataLocal.Minute,
-                dataLocal.Second,
                 DateTimeKind.Local
             );
         }

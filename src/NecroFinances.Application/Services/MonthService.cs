@@ -20,7 +20,7 @@ namespace NecroFinances.Application.Services
         {
             _repositorie = repositorie;
         }
-        public async Task<MesDTO> GetMesByDate(DateTime inicio, DateTime fim, long userID)
+        public async Task<MesDTO> GetMesByDate(DateOnly inicio, DateOnly fim, long userID)
         {
             MesModel mes = await _repositorie.GetMesByDate(inicio, fim, userID);
             if (mes == null)
@@ -30,11 +30,11 @@ namespace NecroFinances.Application.Services
             return new MesDTO(mes);
         }
 
-        private async Task<MesModel> GenerateNewModel(DateTime inicio, long userID)
+        private async Task<MesModel> GenerateNewModel(DateOnly inicio, long userID)
         {
             MesModel novoMes = new MesModel();
 
-            DateTime data = DiasHorasUteisHelper.AjustarParaDia(inicio, 10);
+            DateOnly data = new DateOnly(inicio.Year, inicio.Month, 10);
             novoMes.Data = data;
             novoMes.DiasUteis = DiasHorasUteisHelper.CalcularDiasUteis(data);
             novoMes.HorasUteis = novoMes.DiasUteis * 8;

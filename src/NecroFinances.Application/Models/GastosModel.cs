@@ -21,7 +21,7 @@ namespace NecroFinances.Application.Models
         public long Serie { get; set; }
 
         [Column("DataGasto")]
-        public DateTime DataGasto { get; set; }
+        public DateOnly DataGasto { get; set; }
 
         [Column("TipoGasto")]
         public IndicadorTipoGasto TipoGasto { get; set; }

@@ -20,7 +20,7 @@ namespace NecroFinances.Application.Services
             _repositorie = repositorie;
         }
         
-        public async Task<PatrimonioDTO> GetPatrimonioByDate(DateTime inicio, DateTime fim, long userID)
+        public async Task<PatrimonioDTO> GetPatrimonioByDate(DateOnly inicio, DateOnly fim, long userID)
         {
             PatrimonioModel model = await _repositorie.GetPatrimonioByDate(inicio, fim, userID);
             if (model == null)
@@ -29,7 +29,7 @@ namespace NecroFinances.Application.Services
                 model.Propriedades = new List<PropriedadeModel>();
                 model.Investimentos = new List<InvestimentoModel>();
                 model.Financiamentos = new List<FinanciamentoModel>();
-                model.Data = DiasHorasUteisHelper.AjustarParaDia(inicio, 10);
+                model.Data = new DateOnly(inicio.Year, inicio.Month, 10);
                 model.UserID = userID;
 
                 model = await _repositorie.AddPatrimonio(model);
