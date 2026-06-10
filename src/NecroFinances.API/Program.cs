@@ -55,7 +55,7 @@ namespace NecroFinances.API
                 options.AddPolicy("CorsPolicy", policy =>
                 {
                     policy
-                    .WithOrigins("http://192.168.70.6:4200", "http://localhost:4200", "http://necro.local")
+                    .AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader();
                 });
