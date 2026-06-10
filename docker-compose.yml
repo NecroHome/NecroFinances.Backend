@@ -9,7 +9,7 @@ services:
     restart: unless-stopped
 
     ports:
-      - "8080:8080"
+      - "6002:8080"
 
     environment:
       ConnectionStrings__DefaultConnection: "Server=mariadb_local;Port=3306;Database=NecroFinances;User=admin;Password=thiago123;"
