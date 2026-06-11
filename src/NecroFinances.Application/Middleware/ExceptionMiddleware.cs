@@ -35,8 +35,6 @@ namespace NecroFinances.Application.Middleware
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while treating the request", context.Request.Path);
-
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
