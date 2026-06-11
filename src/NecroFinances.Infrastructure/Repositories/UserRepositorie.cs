@@ -45,18 +45,7 @@ namespace NecroFinances.Infrastructure.Repositories
 
         public UserModel GetByUserIdAndRefreshToken(string refreshToken)
         {
-            UserModel user = _context.Usuarios.Where(w => w.RefreshToken == refreshToken).FirstOrDefault();
-            if (user == null)
-            {
-                throw new Exception("Não foi encontrado o Usuario para o Token");
-            }
-
-            if (user.RefreshTokenExpiryTime <= DateTime.UtcNow)
-            {
-                throw new Exception("Sessão expirada, por favor, faça o Login novamente.");
-            }
-
-            return user;
+            return _context.Usuarios.Where(w => w.RefreshToken == refreshToken).FirstOrDefault();
         }
 
         public UserModel GetUserById(long id)

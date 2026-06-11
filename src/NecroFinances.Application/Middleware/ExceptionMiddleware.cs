@@ -34,6 +34,19 @@ namespace NecroFinances.Application.Middleware
             {
                 await _next(context);
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+
+                var response = new
+                {
+                    success = false,
+                    message = ex.Message
+                };
+
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
+            }
             catch (Exception ex)
             {
                 context.Response.ContentType = "application/json";
@@ -55,7 +68,7 @@ namespace NecroFinances.Application.Middleware
                     message = "Internal server error",
                     details = ex.Message
                 };
-
+                
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
             }
         }

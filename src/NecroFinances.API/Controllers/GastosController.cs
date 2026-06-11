@@ -24,7 +24,7 @@ namespace NecroFinances.API.Controllers
             string user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (!long.TryParse(user, out long userID))
             {
-                return Unauthorized();
+                return Unauthorized("Você não tem permissão para acessar este serviço");
             }
 
             if (dto == null)
@@ -42,7 +42,7 @@ namespace NecroFinances.API.Controllers
             string user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (!long.TryParse(user, out long userID))
             {
-                return Unauthorized();
+                return Unauthorized("Você não tem permissão para acessar este serviço");
             }
 
             if (dto == null)
@@ -60,7 +60,7 @@ namespace NecroFinances.API.Controllers
             string user = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (!long.TryParse(user, out long userID))
             {
-                return Unauthorized();
+                return Unauthorized("Você não tem permissão para acessar este serviço.");
             }
 
             return Ok(await _gastosService.DeleteGasto(gastoId, userID));

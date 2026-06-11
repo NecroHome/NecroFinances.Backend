@@ -66,6 +66,18 @@ namespace NecroFinances.Application.Services
         public TokenResponse RefreshToken(string refreshToken)
         {
             UserModel user = _userRepositorie.GetByUserIdAndRefreshToken(refreshToken);
+
+
+            if (user == null)
+            {
+                throw new UnauthorizedAccessException("Sessão inválida.");
+            }
+
+            if (user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            {
+                throw new UnauthorizedAccessException("Sessão expirada, por favor, faça o Login novamente.");
+            }
+
             return GenerateToken(user);
         }
     }

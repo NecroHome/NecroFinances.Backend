@@ -24,14 +24,14 @@ namespace NecroFinances.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserDTO userDTO)
         {
-            try
+            var user = await _userService.RegisterAsync(userDTO);
+
+            if (user == null)
             {
-                var user = await _userService.RegisterAsync(userDTO);
-                return Ok(new { message = "Usuário criado com sucesso", user.Username });
-            } catch (Exception ex)
-            {
-                return BadRequest(new { error = ex.Message });
+                return Conflict("Usuário já em uso.");
             }
+
+            return Ok(new { message = "Usuário criado com sucesso", user.Username });
         }
 
         [HttpPost("login")]
@@ -41,7 +41,7 @@ namespace NecroFinances.API.Controllers
 
             if (user == null)
             {
-                return Unauthorized("Usuário ou senha inválidos");
+                return Unauthorized("Usuário ou senha inválidos.");
             }
 
             TokenResponse token = _tokenService.GenerateToken(user);
@@ -62,13 +62,6 @@ namespace NecroFinances.API.Controllers
         {
             _userService.Logout(userID);
             return Ok();
-        }
-
-        [Authorize]
-        [HttpGet("test-error")]
-        public IActionResult TestError()
-        {
-            throw new Exception("Erro proposital para teste.");
         }
     }
 }

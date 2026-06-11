@@ -23,7 +23,7 @@ namespace NecroFinances.Application.Services
         {
             if (await _repositorie.IsRegisteredAsync(userDTO.Username) != null)
             {
-                throw new Exception("Usuário já existe");
+                return null;
             }
 
             var user = new UserModel
