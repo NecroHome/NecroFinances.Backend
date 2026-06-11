@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
+using NecroFinances.Application.Enums;
 using NecroFinances.Application.Interfaces;
 using NecroFinances.Application.Models;
-using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace NecroFinances.Application.Services
@@ -12,29 +11,72 @@ namespace NecroFinances.Application.Services
         private readonly object _loggerLock = new();
         private readonly LoggerSettings _settings;
 
-        public LoggerService(
-            IOptions<LoggerSettings> options
-            )
+        public LoggerService(IOptions<LoggerSettings> options)
         {
             _settings = options.Value;
         }
 
-        public void Log(string message)
+        public void Info(string message, LogContext? context = null)
         {
-            Write(message);
+            Write(LoggerLevel.Info, message, context);
         }
 
-        public void Log(string message, Exception exception)
+        public void Warn(string message, LogContext? context = null)
+        {
+            Write(LoggerLevel.Warn, message, context);
+        }
+
+        public void Error(string message, Exception ex, LogContext? context = null)
+        {
+            Write(LoggerLevel.Error, message, context, ex);
+        }
+
+        public void Error(Exception ex, LogContext? context = null)
+        {
+            Write(LoggerLevel.Error, ex.Message, context, ex);
+        }
+
+        private void Write(LoggerLevel level, string message, LogContext? context = null, Exception? exception = null)
         {
             StringBuilder sb = new();
 
-            sb.AppendLine(message);
-            AppendException(sb, exception);
+            sb.AppendLine($"{DateTime.Now:dd/MM/yyyy HH:mm:ss:fff} [{level.ToString().ToUpper()}]");
 
-            Write(sb.ToString());
+            if (!string.IsNullOrWhiteSpace(context?.ClassName))
+            {
+                sb.AppendLine($"Classe: {context.ClassName}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(context?.MethodName))
+            {
+                sb.AppendLine($"Método: {context.MethodName}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(context?.HttpMethod) || !string.IsNullOrWhiteSpace(context?.Route))
+            {
+                sb.AppendLine($"Request: {context?.HttpMethod} {context?.Route}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(context?.User))
+            {
+                sb.AppendLine($"Usuário: {context.User}");
+            }
+
+            sb.AppendLine($"Mensagem: {message}");
+
+            if (exception != null)
+            {
+                AppendException(sb, exception);
+            }
+
+            sb.AppendLine();
+            sb.AppendLine("--------------------------------------------------");
+            sb.AppendLine();
+
+            SaveToFile(sb.ToString());
         }
 
-        private void Write(string content)
+        private void SaveToFile(string content)
         {
             DateTime now = DateTime.Now;
 
@@ -44,11 +86,10 @@ namespace NecroFinances.Application.Services
             Directory.CreateDirectory(monthFolder);
 
             string filePath = Path.Combine(monthFolder, $"{now.Day:00}.log");
-            string entry = $"{now:dd/MM/yyyy HH:mm:ss:fff}: {content}" + Environment.NewLine + Environment.NewLine;
 
             lock (_loggerLock)
             {
-                File.AppendAllText(filePath, entry, Encoding.UTF8);
+                File.AppendAllText(filePath, content, Encoding.UTF8);
             }
         }
 

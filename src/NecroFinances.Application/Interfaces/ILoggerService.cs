@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NecroFinances.Application.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,7 +7,8 @@ namespace NecroFinances.Application.Interfaces
 {
     public interface ILoggerService
     {
-        void Log(string log);
-        void Log(string log, Exception ex);
+        void Info(string message, LogContext? context = null);
+        void Warn(string message, LogContext? context = null);
+        void Error(string message, Exception ex, LogContext? context = null);
     }
 }

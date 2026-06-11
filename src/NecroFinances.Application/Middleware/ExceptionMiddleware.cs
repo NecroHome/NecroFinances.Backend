@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using NecroFinances.Application.Interfaces;
+using NecroFinances.Application.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -38,7 +39,15 @@ namespace NecroFinances.Application.Middleware
                 context.Response.ContentType = "application/json";
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                _fileLogger.Log("Error while treating the request", ex);
+                _fileLogger.Error("Error while treating the request", ex,
+                    new LogContext
+                    {
+                        ClassName = nameof(ExceptionMiddleware),
+                        MethodName = nameof(InvokeAsync),
+                        HttpMethod = context.Request.Method,
+                        Route = context.Request.Path
+                    }
+                );
 
                 var response = new
                 {
