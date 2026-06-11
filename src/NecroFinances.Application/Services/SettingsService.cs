@@ -42,6 +42,7 @@ namespace NecroFinances.Application.Services
                 baseModel.ValorHora = 0;
                 baseModel.SalarioMinimo = 0;
                 baseModel.PercentagemTaxaINSS = 0;
+                baseModel.PercentagemTaxaIRPF = 0;
                 baseModel.PercentagemTaxaCooperativa = 0;
                 baseModel.ValorPlanoDental = 0;
                 baseModel.ValorPlanoSaude = 0;
@@ -57,6 +58,7 @@ namespace NecroFinances.Application.Services
             novoModel.ValorHora = baseModel.ValorHora;
             novoModel.SalarioMinimo = baseModel.SalarioMinimo;
             novoModel.PercentagemTaxaINSS = baseModel.PercentagemTaxaINSS;
+            novoModel.PercentagemTaxaIRPF = baseModel.PercentagemTaxaIRPF;
             novoModel.PercentagemTaxaCooperativa = baseModel.PercentagemTaxaCooperativa;
             novoModel.ValorPlanoDental = baseModel.ValorPlanoDental;
             novoModel.ValorPlanoSaude = baseModel.ValorPlanoSaude;
@@ -74,6 +76,7 @@ namespace NecroFinances.Application.Services
             model.ValorHora = dto.ValorHora;
             model.SalarioMinimo = dto.SalarioMinimo;
             model.PercentagemTaxaINSS = dto.PercentagemTaxaINSS;
+            model.PercentagemTaxaIRPF = dto.PercentagemTaxaIRPF;
             model.PercentagemTaxaCooperativa = dto.PercentagemTaxaCooperativa;
             model.ValorPlanoDental = dto.ValorPlanoDental;
             model.ValorPlanoSaude = dto.ValorPlanoSaude;

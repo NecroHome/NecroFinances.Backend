@@ -14,6 +14,7 @@ namespace NecroFinances.Application.Dtos
         public double ValorHora { get; set; }
         public double SalarioMinimo { get; set; }
         public double PercentagemTaxaINSS { get; set; }
+        public double PercentagemTaxaIRPF { get; set; }
         public double PercentagemTaxaCooperativa { get; set; }
         public double ValorPlanoDental { get; set; }
         public double ValorPlanoSaude { get; set; }
@@ -31,6 +32,7 @@ namespace NecroFinances.Application.Dtos
             this.ValorHora = baseSettings.ValorHora;
             this.SalarioMinimo = baseSettings.SalarioMinimo;
             this.PercentagemTaxaINSS = baseSettings.PercentagemTaxaINSS;
+            this.PercentagemTaxaIRPF = baseSettings.PercentagemTaxaIRPF;
             this.PercentagemTaxaCooperativa = baseSettings.PercentagemTaxaCooperativa;
             this.ValorPlanoDental = baseSettings.ValorPlanoDental;
             this.ValorPlanoSaude = baseSettings.ValorPlanoSaude;
@@ -44,6 +46,7 @@ namespace NecroFinances.Application.Dtos
             ValorHora = model.ValorHora;
             SalarioMinimo = model.SalarioMinimo;
             PercentagemTaxaINSS = model.PercentagemTaxaINSS;
+            PercentagemTaxaIRPF = model.PercentagemTaxaIRPF;
             PercentagemTaxaCooperativa = model.PercentagemTaxaCooperativa;
             ValorPlanoDental = model.ValorPlanoDental;
             ValorPlanoSaude = model.ValorPlanoSaude;

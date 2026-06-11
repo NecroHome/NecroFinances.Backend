@@ -63,5 +63,12 @@ namespace NecroFinances.API.Controllers
             _userService.Logout(userID);
             return Ok();
         }
+
+        [Authorize]
+        [HttpGet("test-error")]
+        public IActionResult TestError()
+        {
+            throw new Exception("Erro proposital para teste.");
+        }
     }
 }

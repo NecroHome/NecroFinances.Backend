@@ -23,6 +23,9 @@ namespace NecroFinances.Application.Models
         [Column("PercentagemTaxaINSS")]
         public double PercentagemTaxaINSS { get; set; }
 
+        [Column("PercentagemTaxaIRPF")]
+        public double PercentagemTaxaIRPF { get; set; }
+
         [Column("PercentagemTaxaCooperativa")]
         public double PercentagemTaxaCooperativa { get; set; }
 

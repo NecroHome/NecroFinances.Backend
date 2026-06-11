@@ -19,6 +19,12 @@ namespace NecroFinances.Application.Dtos
         public double totalRestante { get; set; }
         public double diferencaRestante { get; set; }
 
+        public double totalINSS { get; set; }
+        public double diferencaINSS { get; set; }
+
+        public double totalIRPF { get; set; }
+        public double diferencaIRPF { get; set; }
+
         public List<PropriedadeDTO> propriedades { get; set; }
         public List<InvestimentoDTO> investimentos { get; set; }
         public List<FinanciamentoDTO> financiamentos { get; set; }
