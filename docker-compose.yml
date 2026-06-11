@@ -18,6 +18,9 @@ services:
     networks:
       - necro_network
 
+    volumes:
+      - /home/logs/NecroFinances:/logs
+
 networks:
   necro_network:
     external: true

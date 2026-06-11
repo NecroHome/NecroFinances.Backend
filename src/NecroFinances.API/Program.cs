@@ -7,6 +7,7 @@ using NecroFinances.Application.Models;
 using NecroFinances.Application.Services;
 using NecroFinances.Infrastructure.Persistence;
 using NecroFinances.Infrastructure.Repositories;
+using NecroFinances.Application.Extensions;
 using System.Text;
 
 namespace NecroFinances.API
@@ -17,16 +18,16 @@ namespace NecroFinances.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
 
-            builder.Services.AddScoped<ISettingsService, SettingsService>();
+            builder.Services.AddSingleton<ILoggerService, LoggerService>();
+
             builder.Services.AddScoped<ISettingsRepositorie, SettingsRepositorie>();
             builder.Services.AddScoped<IMesRepositorie, MesRepositorie>();
             builder.Services.AddScoped<IPatrimonioRepositorie, PatrimonioRepositorie>();
             builder.Services.AddScoped<IUserRepositorie, UserRepositorie>();
 
+            builder.Services.AddScoped<ISettingsService, SettingsService>();
             builder.Services.AddScoped<IGastosService, GastosService>();
             builder.Services.AddScoped<IGastosRepositorie, GastosRepositorie>();
             builder.Services.AddScoped<IMesService, MesService>();
@@ -44,6 +45,9 @@ namespace NecroFinances.API
 
             builder.Services.Configure<JwtSettings>(
                 builder.Configuration.GetSection("Jwt")
+            );
+            builder.Services.Configure<LoggerSettings>(
+                builder.Configuration.GetSection("LoggerSettings")
             );
 
             builder.Services.AddOpenApi();
@@ -96,8 +100,9 @@ namespace NecroFinances.API
                 app.UseSwaggerUI();
             }
 
+            app.UseGlobalExceptionHandler();
+
             app.UseCors("CorsPolicy");
-            //app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
 
