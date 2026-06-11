@@ -54,12 +54,14 @@ namespace NecroFinances.Application.Services
             double taxaMesAnterior = totalBrutoMesAnterior * settingsMesAnterior.PercentagemTaxaCooperativa;
             double pspdMesAtual = settingsMesAtual.ValorPlanoDental + settingsMesAtual.ValorPlanoSaude;
             double pspdMesAnterior = settingsMesAnterior.ValorPlanoDental + settingsMesAnterior.ValorPlanoSaude;
+            double outrosMesAtual = settingsMesAtual.Outros;
+            double outrosMesAnterior = settingsMesAnterior.Outros;
 
             double irpfMesAtual = totalBrutoMesAtual * settingsMesAtual.PercentagemTaxaIRPF;
             double irpfMesAnterior = totalBrutoMesAnterior * settingsMesAnterior.PercentagemTaxaIRPF;
 
-            double totalDescontosMesAtual = inssMesAtual + taxaMesAtual + pspdMesAtual + irpfMesAtual;
-            double totalDescontosMesAnterior = inssMesAnterior + taxaMesAnterior + pspdMesAnterior + irpfMesAnterior;
+            double totalDescontosMesAtual = inssMesAtual + taxaMesAtual + pspdMesAtual + irpfMesAtual + outrosMesAtual;
+            double totalDescontosMesAnterior = inssMesAnterior + taxaMesAnterior + pspdMesAnterior + irpfMesAnterior + outrosMesAnterior;
             double diferencaDescontos = totalDescontosMesAtual - totalDescontosMesAnterior;
 
             double totalLiquidoMesAtual = totalBrutoMesAtual - totalDescontosMesAtual;
@@ -121,6 +123,8 @@ namespace NecroFinances.Application.Services
             double diferencaINSS = inssMesAtual - inssMesAnterior;
             double diferencaIRPF = irpfMesAtual - irpfMesAnterior;
 
+            double diferencaOutros = outrosMesAtual - outrosMesAnterior;
+
             double totalGastosFixosMesAtual = gastosMesAtual.Where(w => w.TipoGasto == IndicadorTipoGasto.RECORRENTE).Sum(s => s.Valor);
             double totalGastosFixasMesAnterior = gastosMesAnterior.Where(w => w.TipoGasto == IndicadorTipoGasto.RECORRENTE).Sum(s => s.Valor);
             double diferencaGastosFixos = totalGastosFixosMesAtual - totalGastosFixasMesAnterior;
@@ -165,6 +169,9 @@ namespace NecroFinances.Application.Services
             mainData.diferencaINSS = diferencaINSS;
             mainData.totalIRPF = irpfMesAtual;
             mainData.diferencaIRPF = diferencaIRPF;
+
+            mainData.totalOutros = outrosMesAtual;
+            mainData.diferencaOutros = diferencaOutros;
 
             mainData.propriedades = propriedades.OrderByDescending(o => o.ValorPropriedade).ToList();
             mainData.investimentos = investimentos.OrderByDescending(o => o.ValorInvestimento).ToList();

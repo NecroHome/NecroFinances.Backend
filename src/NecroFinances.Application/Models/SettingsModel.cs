@@ -35,6 +35,9 @@ namespace NecroFinances.Application.Models
         [Column("ValorPlanoSaude")]
         public double ValorPlanoSaude { get; set; }
 
+        [Column("Outros")]
+        public double Outros { get; set; }
+
         [Column("DesafioGastos")]
         public double DesafioGastos { get; set; }
 

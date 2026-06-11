@@ -18,6 +18,7 @@ namespace NecroFinances.Application.Dtos
         public double PercentagemTaxaCooperativa { get; set; }
         public double ValorPlanoDental { get; set; }
         public double ValorPlanoSaude { get; set; }
+        public double Outros { get; set; }
         public double DesafioGastos { get; set; }
 
         public SettingsDTO()
@@ -36,6 +37,7 @@ namespace NecroFinances.Application.Dtos
             this.PercentagemTaxaCooperativa = baseSettings.PercentagemTaxaCooperativa;
             this.ValorPlanoDental = baseSettings.ValorPlanoDental;
             this.ValorPlanoSaude = baseSettings.ValorPlanoSaude;
+            this.Outros = baseSettings.Outros;
             this.DesafioGastos = baseSettings.DesafioGastos;
         }
 
@@ -50,6 +52,7 @@ namespace NecroFinances.Application.Dtos
             PercentagemTaxaCooperativa = model.PercentagemTaxaCooperativa;
             ValorPlanoDental = model.ValorPlanoDental;
             ValorPlanoSaude = model.ValorPlanoSaude;
+            Outros = model.Outros;
             DesafioGastos = model.DesafioGastos;
         }
 

@@ -46,6 +46,7 @@ namespace NecroFinances.Application.Services
                 baseModel.PercentagemTaxaCooperativa = 0;
                 baseModel.ValorPlanoDental = 0;
                 baseModel.ValorPlanoSaude = 0;
+                baseModel.Outros = 0;
                 baseModel.DesafioGastos = 0;
                 baseModel.UserID = userID;
 
@@ -63,6 +64,7 @@ namespace NecroFinances.Application.Services
             novoModel.ValorPlanoDental = baseModel.ValorPlanoDental;
             novoModel.ValorPlanoSaude = baseModel.ValorPlanoSaude;
             novoModel.DesafioGastos = baseModel.DesafioGastos;
+            novoModel.Outros = baseModel.Outros;
             novoModel.UserID = userID;
 
             novoModel = await _repository.SaveSettings(novoModel);
@@ -80,6 +82,7 @@ namespace NecroFinances.Application.Services
             model.PercentagemTaxaCooperativa = dto.PercentagemTaxaCooperativa;
             model.ValorPlanoDental = dto.ValorPlanoDental;
             model.ValorPlanoSaude = dto.ValorPlanoSaude;
+            model.Outros = dto.Outros;
             model.DesafioGastos = dto.DesafioGastos;
 
             model = await _repository.UpdateSettings(model);
