@@ -252,6 +252,7 @@ namespace NecroFinances.Application.Services
 
                         Parcela = tipoGasto == IndicadorTipoGasto.PARCELADO ? item.Parcela : 0,
                         TotalParcelas = tipoGasto == IndicadorTipoGasto.PARCELADO ? item.TotalParcelas : 0,
+                        TipoRecurso = item.TipoRecurso,
 
                         Origem = new List<GastosDTO>
                 {
@@ -265,7 +266,8 @@ namespace NecroFinances.Application.Services
                         Icone = item.Icone,
                         Descricao = item.Descricao,
                         Parcela = item.Parcela,
-                        TotalParcelas = item.TotalParcelas
+                        TotalParcelas = item.TotalParcelas,
+                        TipoRecurso = item.TipoRecurso
                     }
                 }
                     });
@@ -295,7 +297,8 @@ namespace NecroFinances.Application.Services
                             Icone = x.Icone,
                             Descricao = x.Descricao,
                             Parcela = 0,
-                            TotalParcelas = 0
+                            TotalParcelas = 0,
+                            TipoRecurso = x.TipoRecurso
                         }).ToList()
                     });
 

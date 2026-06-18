@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NecroFinances.Application.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -15,5 +16,6 @@ namespace NecroFinances.Application.Dtos
         public int Parcela { get; set; }
         public int TotalParcelas { get; set; }
         public List<GastosDTO> Origem { get; set; } = new();
+        public IndicadorTipoRecurso TipoRecurso { get; set; }
     }
 }
