@@ -190,6 +190,8 @@ namespace NecroFinances.Application.Services
             mainData.totalGastosAvulsos = totalGastosAvulsosMesAtual;
             mainData.diferencaGastosAvulsos = diferencaGastosAvulsos;
 
+            mainData.totalGastosFixosCartao = gastosMesAtual.Where(w => w.TipoGasto == IndicadorTipoGasto.RECORRENTE && w.TipoRecurso == IndicadorTipoRecurso.CARTAO).Sum(s => s.Valor);
+
             mainData.valorMeta = valorMeta;
             mainData.diferencaMeta = diferencaMeta;
 
