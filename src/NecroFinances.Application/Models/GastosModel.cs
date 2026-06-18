@@ -43,5 +43,8 @@ namespace NecroFinances.Application.Models
 
         [Column("UserID")]
         public long UserID { get; set; }
+
+        [Column("TipoRecurso")]
+        public IndicadorTipoRecurso TipoRecurso { get; set; }
     }
 }

@@ -40,7 +40,8 @@ namespace NecroFinances.Application.Services
                         TotalParcelas = dto.TotalParcelas,
                         Icone = dto.Icone,
                         Serie = serie,
-                        UserID = userID
+                        UserID = userID,
+                        TipoRecurso = dto.TipoRecurso
                     };
 
                     await _gastoRepositorie.AddGasto(parcela);
@@ -64,7 +65,8 @@ namespace NecroFinances.Application.Services
                         Parcela = 0,
                         TotalParcelas = 0,
                         Serie = serie,
-                        UserID = userID
+                        UserID = userID,
+                        TipoRecurso = dto.TipoRecurso
                     };
 
                     await _gastoRepositorie.AddGasto(gasto);
@@ -82,7 +84,8 @@ namespace NecroFinances.Application.Services
                     Parcela = dto.Parcela,
                     TotalParcelas = dto.TotalParcelas,
                     Serie = dto.Serie,
-                    UserID = userID
+                    UserID = userID,
+                    TipoRecurso = dto.TipoRecurso
                 };
 
                 await _gastoRepositorie.AddGasto(gasto);
@@ -118,6 +121,7 @@ namespace NecroFinances.Application.Services
             model.Descricao = dto.Descricao;
             model.Parcela = dto.Parcela;
             model.TotalParcelas = dto.Parcela;
+            model.TipoRecurso = dto.TipoRecurso;
 
             model = await _gastoRepositorie.UpdateGasto(model);
             return new GastosDTO(model);

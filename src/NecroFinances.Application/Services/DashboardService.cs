@@ -193,24 +193,27 @@ namespace NecroFinances.Application.Services
             mainData.valorMeta = valorMeta;
             mainData.diferencaMeta = diferencaMeta;
 
-            mainData.listaGastosFixos = ConsolidarGastos(gastosMesAtual, gastosMesAnterior, IndicadorTipoGasto.RECORRENTE, totalLiquidoMesAtual);
-            mainData.listaGastosParcelados = ConsolidarGastos(gastosMesAtual, gastosMesAnterior, IndicadorTipoGasto.PARCELADO, totalLiquidoMesAtual);
-            mainData.listaGastosAvulsos = ConsolidarGastos(gastosMesAtual, gastosMesAnterior, IndicadorTipoGasto.AVULSO, totalLiquidoMesAtual);
+            mainData.listaGastosFixosCartao = ConsolidarGastos(gastosMesAtual, gastosMesAnterior, IndicadorTipoGasto.RECORRENTE, totalLiquidoMesAtual, IndicadorTipoRecurso.CARTAO);
+            mainData.listaGastosFixosDebto = ConsolidarGastos(gastosMesAtual, gastosMesAnterior, IndicadorTipoGasto.RECORRENTE, totalLiquidoMesAtual, IndicadorTipoRecurso.DINHEIRO);
+            mainData.listaGastosParcelados = ConsolidarGastos(gastosMesAtual, gastosMesAnterior, IndicadorTipoGasto.PARCELADO, totalLiquidoMesAtual, IndicadorTipoRecurso.CARTAO);
+            mainData.listaGastosAvulsos = ConsolidarGastos(gastosMesAtual, gastosMesAnterior, IndicadorTipoGasto.AVULSO, totalLiquidoMesAtual, IndicadorTipoRecurso.CARTAO);
 
             return mainData;
         }
 
-        private List<DashboardDTO> ConsolidarGastos(List<GastosModel> mesAtual, List<GastosModel> mesAnterior, IndicadorTipoGasto tipoGasto, double totalGastosMesAtual)
+        private List<DashboardDTO> ConsolidarGastos(List<GastosModel> mesAtual, List<GastosModel> mesAnterior, IndicadorTipoGasto tipoGasto, double totalGastosMesAtual, IndicadorTipoRecurso tipoRecurso)
         {
             var resultado = new List<DashboardDTO>();
             int id = 0;
 
             var atualFiltrado = mesAtual
                 .Where(w => w.TipoGasto == tipoGasto)
+                .Where(w => w.TipoRecurso == tipoRecurso)
                 .ToList();
 
             var anteriorFiltrado = mesAnterior
                 .Where(w => w.TipoGasto == tipoGasto)
+                .Where(w => w.TipoRecurso == tipoRecurso)
                 .ToList();
 
             if (tipoGasto == IndicadorTipoGasto.PARCELADO)

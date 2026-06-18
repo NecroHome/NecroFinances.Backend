@@ -12,4 +12,10 @@ namespace NecroFinances.Application.Enums
         PARCELADO = 1,
         AVULSO = 2
     }
+
+    public enum IndicadorTipoRecurso
+    {
+        DINHEIRO = 0,
+        CARTAO = 1
+    }
 }

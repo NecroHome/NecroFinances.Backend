@@ -19,6 +19,7 @@ namespace NecroFinances.Application.Dtos
         public string Descricao { get; set; }
         public int Parcela { get; set; }
         public int TotalParcelas { get; set; }
+        public IndicadorTipoRecurso TipoRecurso { get; set; }
 
         public GastosDTO()
         {
@@ -36,6 +37,7 @@ namespace NecroFinances.Application.Dtos
             Parcela = model.Parcela;
             Icone = model.Icone;
             TotalParcelas = model.TotalParcelas;
+            TipoRecurso = model.TipoRecurso;
         }
 
         public static List<GastosDTO> GenerateList(List<GastosModel> list)
